@@ -1,5 +1,5 @@
 <script>
-	import { redirectToUrl } from '../../scripts/redirectToUrl';
+	import { redirectToUrl } from '$scripts/redirectToUrl';
 </script>
 
 <div class="container" style="max-width: 600px">

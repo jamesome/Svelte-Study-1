@@ -42,7 +42,7 @@
 			<div class="col">
 				<button
 					class="w-100 btn btn-secondary btn-lg"
-					onclick="location.href='items.html'"
+					onclick="location.href='/items'"
 					type="button">취소</button
 				>
 			</div>
