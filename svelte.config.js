@@ -21,7 +21,7 @@ const config = {
 		alias: {
 			$components: 'src/components',
 			$scripts: 'src/scripts'
-		}
+		},
 	}
 };
 

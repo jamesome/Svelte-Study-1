@@ -3,13 +3,14 @@
 		<h2>상품 등록 폼</h2>
 	</div>
 	<h4 class="mb-3">상품 입력</h4>
-	<form action="item.html" method="post">
+	<form on:submit|preventDefault={handleSubmit}>
 		<div>
 			<label for="itemName">상품명</label>
 			<input
 				type="text"
 				id="itemName"
 				name="itemName"
+				bind:value={formData.itemName}
 				class="form-control"
 				placeholder="이름을 입력하세요"
 			/>
@@ -20,6 +21,7 @@
 				type="text"
 				id="price"
 				name="price"
+				bind:value={formData.price}
 				class="form-control"
 				placeholder="가격을 입력하세요"
 			/>
@@ -30,6 +32,7 @@
 				type="text"
 				id="quantity"
 				name="quantity"
+				bind:value={formData.quantity}
 				class="form-control"
 				placeholder="수량을 입력하세요"
 			/>
@@ -49,6 +52,41 @@
 		</div>
 	</form>
 </div>
+
+<script>
+
+	let formData = {
+		itemName: "",
+		price: "",
+		quantity: "",
+	};
+
+	async function handleSubmit() {
+		const apiUrl = 'http://localhost:8080/items/add';
+		let jsonResponse = '';
+
+		try {
+			const response = await fetch(apiUrl, {
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			});
+
+			if (!response.ok) {
+				throw new Error("error!");
+			} else {
+				jsonResponse = await response.json();
+				console.log(jsonResponse.id);
+			}
+		} catch (error) {
+			console.log('오류', error);
+		} finally {
+			window.location.href = `/item/${jsonResponse.id}`;
+		}
+	}
+</script>
 
 <style>
 	.container {
