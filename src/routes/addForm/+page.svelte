@@ -62,7 +62,7 @@
 	};
 
 	async function handleSubmit() {
-		const apiUrl = 'http://localhost:8080/items/add';
+		const apiUrl = 'http://localhost:8080/items';
 		let jsonResponse = '';
 
 		try {
