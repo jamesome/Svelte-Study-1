@@ -1,3 +1,37 @@
+<script>
+	let formData = {
+		itemName: '',
+		price: '',
+		quantity: ''
+	};
+
+	async function handleSubmit() {
+		const apiUrl = 'http://localhost:8080/items';
+		let jsonResponse = '';
+
+		try {
+			const response = await fetch(apiUrl, {
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json'
+				},
+				body: JSON.stringify(formData)
+			});
+
+			if (!response.ok) {
+				throw new Error('error!');
+			} else {
+				jsonResponse = await response.json();
+				console.log(jsonResponse.id);
+			}
+		} catch (error) {
+			console.log('오류', error);
+		} finally {
+			window.location.href = `/item/${jsonResponse.id}`;
+		}
+	}
+</script>
+
 <div class="container">
 	<div class="py-5 text-center">
 		<h2>상품 등록 폼</h2>
@@ -52,40 +86,6 @@
 		</div>
 	</form>
 </div>
-
-<script>
-	let formData = {
-		itemName: "",
-		price: "",
-		quantity: "",
-	};
-
-	async function handleSubmit() {
-		const apiUrl = 'http://localhost:8080/items';
-		let jsonResponse = '';
-
-		try {
-			const response = await fetch(apiUrl, {
-				method: 'POST',
-				headers: {
-					'content-type': 'application/json',
-				},
-				body: JSON.stringify(formData),
-			});
-
-			if (!response.ok) {
-				throw new Error("error!");
-			} else {
-				jsonResponse = await response.json();
-				console.log(jsonResponse.id);
-			}
-		} catch (error) {
-			console.log('오류', error);
-		} finally {
-			window.location.href = `/item/${jsonResponse.id}`;
-		}
-	}
-</script>
 
 <style>
 	.container {
